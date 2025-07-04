@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BATVYER - Parfum</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+    }
+    header {
+      background-color: #111;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-top: 10px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    .variant-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .variant-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 20px;
+      border: 1px solid #eee;
+    }
+    .variant-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5em;
+    }
+    .btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #111;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover {
+      background-color: #c29d66;
+    }
+
+    /* DETAIL */
+    .detail-container {
+      display: none;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .detail-content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .detail-image {
+      flex: 1 1 40%;
+      padding: 10px;
+    }
+    .detail-image img {
+      width: 100%;
+      border-radius: 10px;
+      background-color: #111;
+    }
+    .detail-info {
+      flex: 1 1 60%;
+      padding: 20px;
+    }
+    .detail-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 1.2em;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      margin-right: 10px;
+    }
+    .new-price {
+      color: #b12704;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>BATVYER</h1>
+    <p>Parfum Pria & Wanita | Elegan. Dalam. Tersisa.</p>
+  </header>
+
+  <!-- LAMAN UTAMA -->
+  <div class="container" id="mainPage">
+    <h2 style="margin-bottom: 30px;">Varian Produk</h2>
+    <div class="variant-list">
+      <div class="variant-card">
+        <h2>Malam Nusa</h2>
+        <a href="#" class="btn" onclick="showDetail('malam')">Lihat Detail</a>
+      </div>
+      <div class="variant-card">
+        <h2>Bapak</h2>
+        <a href="#" class="btn" onclick="showDetail('bapak')">Lihat Detail</a>
+      </div>
+      <div class="variant-card">
+        <h2>Kelana</h2>
+        <a href="#" class="btn" onclick="showDetail('kelana')">Lihat Detail</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAMAN DETAIL -->
+  <div class="detail-container" id="detailPage">
+    <div class="detail-content">
+      <div class="detail-image">
+        <img id="detailImage" src="" alt="">
+      </div>
+      <div class="detail-info">
+        <h2 id="detailName"></h2>
+        <p><strong>Deskripsi:</strong><br><span id="detailDesc"></span></p>
+        <p><strong>Bahan utama:</strong><br><span id="detailBahan"></span></p>
+        <p class="price">
+          <span class="old-price">Rp270.000</span>
+          <span class="new-price">Rp135.000</span>
+        </p>
+        <a href="#" class="btn" onclick="goBack()">← Kembali</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 BATVYER. Semua hak dilindungi.
+  </footer>
+
+  <script>
+    const dataProduk = {
+      malam: {
+        nama: "Malam Nusa",
+        deskripsi: "Aroma oriental floral yang menggoda dan mendalam. Cocok untuk malam penuh cerita, misteri, dan romansa.",
+        bahan: "Jasmine, Amber, Musk, Patchouli, Oud",
+        gambar: "https://i.ibb.co/hRBBzHk/malam-nusa.png"
+      },
+      bapak: {
+        nama: "Bapak",
+        deskripsi: "Wewangian maskulin dengan sentuhan kayu dan rempah, menghadirkan karisma dan wibawa sejati.",
+        bahan: "Cedarwood, Black Pepper, Leather, Bergamot",
+        gambar: "https://i.ibb.co/yX4yNv3/bapak.png"
+      },
+      kelana: {
+        nama: "Kelana",
+        deskripsi: "Aroma segar dan petualang, cocok untuk jiwa bebas yang mencintai perjalanan dan kebebasan.",
+        bahan: "Lime, Vetiver, Sea Salt, Green Tea",
+        gambar: "https://i.ibb.co/Jv6rJHz/kelana.png"
+      }
+    };
+
+    function showDetail(key) {
+      const produk = dataProduk[key];
+      document.getElementById("mainPage").style.display = "none";
+      document.getElementById("detailPage").style.display = "block";
+
+      document.getElementById("detailName").innerText = produk.nama;
+      document.getElementById("detailDesc").innerText = produk.deskripsi;
+      document.getElementById("detailBahan").innerText = produk.bahan;
+      document.getElementById("detailImage").src = produk.gambar;
+      document.getElementById("detailImage").alt = produk.nama;
+    }
+
+    function goBack() {
+      document.getElementById("mainPage").style.display = "block";
+      document.getElementById("detailPage").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
